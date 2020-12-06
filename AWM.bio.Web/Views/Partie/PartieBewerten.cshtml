@@ -1,0 +1,56 @@
+@model AWM.bio.Web.Data.AWM.Partie
+
+@{
+    ViewData["Title"] = "PartieBewerten";
+}
+
+
+    <h1>Partie @Model.Adresse</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Stellplatznotiz
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <ul>
+                        @Model.Stellplatznotiz
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Tonnen
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var t in Model.Tonnen)
+                {
+                
+                <tr>
+                <td>@t.Id</td>
+
+                <td>
+                    <a asp-controller="Bewertung" asp-action="Create" asp-route-id="@t.Id">Tonne Bewerten</a>
+                </td>
+                </tr>
+                
+                }
+
+            </tr>
+            </tbody>
+    </table>

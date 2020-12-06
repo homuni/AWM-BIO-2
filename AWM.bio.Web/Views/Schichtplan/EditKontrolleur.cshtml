@@ -1,0 +1,25 @@
+﻿@model AWM.bio.Web.Data.AWM.Schichtplan
+
+@{
+    ViewData["Title"] = "EditKontrolleur";
+}
+
+<h1>EditKontrolleur</h1>
+
+<ul>
+    @foreach (var a in Model.Arbeitsauftraege)
+    {
+        <li>
+            @a.Kontrolleur.UserId
+            <ul>
+                @foreach (var k in ViewBag.Kontrolleure)
+                {
+                    <li>
+                        <a asp-controller="Schichtplan" asp-action="ChangeKontrolleur" asp-route-id="@a.Id" asp-route-kid="@k.Id">@k.UserId</a>
+                        
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

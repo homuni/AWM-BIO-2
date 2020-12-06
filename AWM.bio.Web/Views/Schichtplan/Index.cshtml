@@ -1,0 +1,68 @@
+@model IEnumerable<AWM.bio.Web.Data.AWM.Schichtplan>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SchichtDatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gebiete)
+            </th>
+            <th>Kontrolleur</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchichtDatum)
+            </td>
+            <td>
+                <ul>
+                    @foreach (var g in item.Gebiete)
+                    {
+                        <li>
+                            @g.Name
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var g in item.Arbeitsauftraege)
+                    {
+                        <li>
+                            @g.Kontrolleur.UserId
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Datum bearbeiten</a> |
+                <a asp-controller="Schichtplan" asp-action="EditKontrolleur" asp-route-id="@item.Id">Kontrolleur bearbeiten</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="Schichtplan" asp-action="TourStarten" asp-route-id="@item.Id">Tour starten</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

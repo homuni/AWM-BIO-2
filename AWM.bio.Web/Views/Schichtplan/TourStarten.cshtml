@@ -1,0 +1,63 @@
+@model AWM.bio.Web.Data.AWM.Schichtplan
+
+@{
+    ViewData["Title"] = "TourStarten";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tour starten</title>
+</head>
+
+<body>
+
+    <h1>Tour @Model.SchichtDatum</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Gebiete
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            
+             <tr>
+                   
+                    <td>
+                        <ul>
+                            @foreach (var g in Model.Gebiete)
+                            {
+                                <li>
+                                    @g.Name
+                                </li>
+
+                                <ul>
+
+                                    @foreach (var p in g.Partien)
+                                    {
+                                        <li>
+                                            @p.Adresse
+                                        </li>
+
+                                            <a asp-controller="Partie" asp-action="PartieBewerten" asp-route-id="@p.Id">Partie Bewerten</a>
+
+                                    }
+
+
+                                </ul>
+                            }
+                        </ul>
+                    </td>
+
+                </tr>
+            
+        </tbody>
+    </table>
+</body>
+</html>

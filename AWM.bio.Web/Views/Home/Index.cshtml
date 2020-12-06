@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Willkommen</h1>
+        <p>eingeloggt <span id="datetime"></span></p>
+        <script>var dt = new Date();
+          document.getElementById("datetime").innerHTML=dt.toLocaleString();</script>
+    </div>

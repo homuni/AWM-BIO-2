@@ -1,0 +1,60 @@
+@model IEnumerable<AWM.bio.Web.Data.AWM.Partie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stellplatznotiz)
+            </th>
+            <tH>Tonnen</tH>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderBy(x => x.Adresse)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stellplatznotiz)
+            </td>
+            <td>
+                <ul>
+                    @foreach (var tonne in item.Tonnen.OrderByDescending(x => x.Volumen))
+                    {
+                        <li>@tonne.Volumen</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="Tonnen" asp-action="Index" asp-route-id="@item.Id">Tonnen</a> |
+                <a asp-controller="Bewertung" asp-action="Details" asp-route-id="@item.Id">Bewertung</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
